@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<launch>
+    <node name="trajectory_send_node" pkg="trajectory_send" type="trajectory_send_node" output="screen">
+        <rosparam file="$(find arobot_hw)/config/joint_names.yaml" command="load"/>
+    </node>
+</launch>

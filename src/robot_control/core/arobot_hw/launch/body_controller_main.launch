@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="num_samples" default="1" />
+  <arg name="timeout" default="0.005" />
+
+
+  <param name="robot_description" textfile="$(find robot_description)/urdf/robot.URDF" />
+
+  <rosparam file="$(find arobot_hw)/config/robot_body_controller_position.yaml" command="load"/>
+
+  <!-- load the config param -->
+  <include file = "$(find arobot_hw)/launch/load_param.launch" />
+
+  <!-- load the controllers -->
+  <include file = "$(find arobot_hw)/launch/load_body_controller.launch" />
+
+  <node name="controller_main_demo" pkg="arobot_hw" type="controller_main" output="screen">
+    <param name="num_samples" value="$(arg num_samples)"/>
+    <param name="timeout" value="$(arg timeout)"/>
+    <param name="urdf_param" value="/robot_description"/>
+  </node>
+
+
+
+
+</launch>

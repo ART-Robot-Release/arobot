@@ -1,0 +1,8 @@
+# The SensorDetection service returns a list of sensors' states and the ok flag.
+
+#request constants
+---
+#response constants
+bool ok
+string[] name
+int8[] states 

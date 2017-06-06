@@ -1,0 +1,9 @@
+# The SelfDetection service returns the master controller‘ state and the ok flag.
+
+#request constants
+string command
+---
+#response constants
+bool ok
+string states
+string info

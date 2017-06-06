@@ -1,0 +1,34 @@
+motor_type_slave_3:
+            - "DCX_32"
+            - "DCX_26"
+            - "DCX_32"
+            - "DCX_26"
+            - "DCX_32"
+            - "DCX_32"
+            - "DCX_26"
+            - "DCX_32"
+            - "DCX_32"
+
+motor_type_slave_4:
+            - "DCX_32"
+            - "DCX_32"
+            - "DCX_32"
+            - "DCX_32"
+            - "DCX_26"
+            - "DCX_26"
+            - "DCX_32"
+            - "DCX_32"
+            - "RE_40"
+
+motor_type_slave_5:
+            - "NONE"
+            - "NONE"
+            - "DCX_32"
+            - "RE_40"
+            - "DCX_32"
+            - "NONE"
+            - "DCX_26"
+            - "DCX_26"
+            - "DCX_26"
+
+

@@ -1,0 +1,30 @@
+# describe the tree of the links of the robot.
+robot_tree:
+#    - body_to_centor_ground
+#    - mass_centor
+    - head
+    - left_hand
+    - right_hand
+    - waist
+    - left_foot
+    - left_foot_mass
+    - right_foot
+    - right_foot_mass
+
+# body_to_centor_ground: [body_link, body_to_centor_ground]
+
+# mass_centor: [body_link, mass_centor]
+
+head: [body_link, head_link]
+
+left_hand: [body_link, l_hand_link]
+
+right_hand: [body_link, r_hand_link]
+
+waist: [body_link, waist_link]
+
+left_foot: [waist_link, l_foot_link]
+left_foot_mass: [mass_centor, l_foot_link]
+
+right_foot: [waist_link, r_foot_link]
+right_foot_mass: [mass_centor, r_foot_link]

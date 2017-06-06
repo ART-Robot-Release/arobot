@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>control_demo</name>
+  <version>1.0.0</version>
+  <description> This package contains the demo codes</description>
+  <maintainer email="sunxiao@artrobot.com">xiao</maintainer>
+  <license>WTFPL</license>
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>kdl_parser</build_depend>
+  <build_depend>kdl</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>arobot_whisper</build_depend>
+  <build_depend>arobot_kdl</build_depend>
+  <build_depend>arobot_db</build_depend>
+  <build_depend>arobot_hw</build_depend>
+  <build_depend>controller_manager</build_depend>
+
+  <run_depend>kdl_parser</run_depend>
+  <run_depend>kdl</run_depend>
+  <run_depend>xacro</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>arobot_whisper</run_depend>
+  <run_depend>arobot_kdl</run_depend>
+  <run_depend>arobot_db</run_depend>
+  <run_depend>arobot_hw</run_depend>
+  <run_depend>controller_manager</run_depend>
+
+</package>

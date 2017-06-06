@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<launch>
+
+  <param name="robot_description" textfile="$(find robot_description)/urdf/robot.URDF" />
+
+    <rosparam file="$(find arobot_hw)/config/ethercat_slave_no.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/joint_name.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/motor_config.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/motor_type.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/resolution_reduction.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/robot_tree.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/joints_mapping.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/i2t_limit.yaml" command="load"/>
+    <rosparam file="$(find arobot_hw)/config/joints_effort.yaml" command="load"/>
+
+</launch>

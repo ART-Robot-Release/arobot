@@ -1,0 +1,4 @@
+int32 device_no
+---
+int32 status
+

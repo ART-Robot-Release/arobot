@@ -1,0 +1,10 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: robot_description
+    relative_path: urdf/robot.URDF
+  SRDF:
+    relative_path: config/robot.srdf
+  CONFIG:
+    author_name: xsun
+    author_email: sunxiao@artrobot.com
+    generated_timestamp: 1493207951

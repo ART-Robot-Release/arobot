@@ -1,0 +1,8 @@
+# The DriverDetection service returns a list of drivers' states and the ok flag.
+
+#request constants
+---
+#response constants
+bool ok
+uint32[] id
+int8[] states 

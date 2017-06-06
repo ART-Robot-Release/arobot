@@ -1,0 +1,20 @@
+<launch>
+  <arg name="num_samples" default="1" />
+  <arg name="timeout" default="0.005" />
+
+
+
+  <param name="robot_description" textfile="$(find robot_gazebo)/urdf/robot.URDF" />
+
+
+  <node name="control_trans_test" pkg="arobot_hw" type="arobot_trans_test" output="screen">
+    <param name="num_samples" value="$(arg num_samples)"/>
+    <param name="timeout" value="$(arg timeout)"/>
+    <param name="urdf_param" value="/robot_description"/>
+  </node>
+
+
+  <!-- load the config param -->
+  <include file = "$(find arobot_hw)/launch/load_param.launch" />
+
+</launch>

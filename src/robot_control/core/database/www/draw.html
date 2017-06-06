@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>测试学习</title>
+	</head>
+<style>
+
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
+
+</style>
+	<body>
+		<script src="https://d3js.org/d3.v4.min.js"></script>
+		<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+		<script>
+
+		$.ajaxSetup({   
+			    async : false  
+			}); 
+
+
+
+		var width = 900;	
+		var height = 900;	
+
+		var svg = d3.select("body")			
+			.append("svg")		
+			.attr("width", width)		
+			.attr("height", height);
+
+		var padding ={left:50, right:30, top:20, bottom:20};
+
+		var parseTime = d3.timeParse("%d-%b-%y");
+
+		var obj=0;
+
+		var datalen = 1000;
+
+		var data =[];
+
+ 		$.post("json_get", "hi",
+			  function(d){			
+			  	obj = JSON.parse(d);		
+			  });
+
+		 for (var i = 0; i < datalen; i++) {
+		  data[i] = {
+		  	n	: i,
+		  	val	: +obj.id,
+		  	time	: +obj.receiveData.time
+		  };
+		 }
+
+
+		var xScale = d3.scaleLinear()
+			.domain([d3.min(data,function(d){	return d.n;}), d3.max(data, function(d){	return d.n;	})])
+			.range([0, width - padding.left - padding.right]);
+		
+		var yScale = d3.scaleLinear()
+			.domain([d3.min(data,function(d){	return d.val;}),d3.max(data, function(d){	return d.val;	})])
+			.range([height - padding.top - padding.bottom,0])
+		
+		var xAxis = d3.axisBottom()
+			.scale(xScale);         
+	
+
+		var yAxis =d3.axisLeft()
+			.scale(yScale);
+		
+
+
+		svg.append("g")
+		   .attr("class","xAxis")
+		   .attr("transform","translate(" + padding.left +"," + (height - padding.bottom) + ")")
+		   .call(xAxis);
+		   
+			
+
+		svg.append("g")
+		   .attr("class","yAxis")
+		   .attr("transform","translate(" + padding.left +"," + padding.top + ")")
+		   .call(yAxis);
+
+		var line = d3.line()
+			.x(function(d){	return xScale(d.n);	})
+			.y(function(d){	return yScale(d.val);	})
+		
+		svg.append("path")
+		   .datum(data)
+		   .attr("id", "wave")
+		   .attr("fill", "none")
+		   .attr("stroke", "steelblue")
+		   .attr("stroke-linejoin", "round")
+		   .attr("stroke-linecap", "round")
+		   .attr("stroke-width", 1.5)
+		   .attr("transform","translate(" + padding.left +"," + padding.top + ")")
+		   .attr("d", line);
+
+ 
+	 	var focus = svg.append("g")
+		      .attr("class", "focus")
+		      .style("display", "none");
+
+		  focus.append("circle")
+		      .attr("r", 2.5);
+
+		  focus.append("text")
+		      .attr("x", 9)
+		      .attr("dy", ".35em");
+		
+		var gline = svg.append("g")
+			.attr("class","gline")
+			.style("display", "none");
+
+		gline.append("line")
+		      .attr("class","xLine")
+		      .style("stroke","steelblue");
+			
+		gline.append("line")
+		      .attr("class","yLine")
+                      .style("stroke","steelblue");
+
+		  svg.append("rect")
+		      .attr("class", "overlay")
+		      .attr("width", width - padding.left - padding.right)
+		      .attr("height", height - padding.top - padding.bottom)
+		      .attr("transform","translate(" + padding.left +"," + padding.top + ")")
+		      .on("mouseover", function() { focus.style("display", null);gline.style("display", null); })
+		      .on("mouseout", function() { focus.style("display", "none");gline.style("display", "none"); })
+		      .on("mousemove", mousemove);
+
+
+		    bisectDate = d3.bisector(function(d) { return d.n; }).left,
+		    formatValue = d3.format(",.2f"),
+		    formatCurrency = function(d) { return "id=" + formatValue(d); };
+
+		  function mousemove() {
+			var x0 = xScale.invert(d3.mouse(this)[0]),
+			i = bisectDate(window.data, x0, 1),
+			d0 = data[i - 1],
+        		d1 = data[i],
+        		d = x0 - d0.n > d1.n - x0 ? d1 : d0;
+
+			var datax = xScale(d.n), datay = yScale(d.val);
+			var moux = d3.mouse(this)[0] + padding.left, mouy = d3.mouse(this)[1] + padding.top;
+
+		    focus.attr("transform", "translate(" + (datax + padding.left) + "," + (datay + padding.top) + ")");
+		    focus.select("text").text(formatCurrency(d.val));
+
+		    gline.style.display="block";
+		    gline.select(".xLine").attr("x1",moux)
+					.attr("y1",padding.top)
+					.attr("x2",moux)
+					.attr("y2",height - padding.bottom);
+
+		    gline.select(".yLine").attr("x1",padding.left)
+					.attr("y1",mouy)
+					.attr("x2",width - padding.right)
+					.attr("y2",mouy);
+		  }
+
+
+
+		 var timer = setInterval(function() {
+
+			$.post("json_get", "hi",
+			  function(d){			
+			  	obj = JSON.parse(d);		
+			  });
+
+			data.splice(0,1);
+			data[datalen-1] = {
+			  	n	: data[datalen-2].n + 1 ,
+			  	val	: +obj.id,
+			  	time	: +obj.receiveData.time
+		  	};
+
+
+
+
+			xScale.domain([d3.min(data,function(d){	return d.n;}), d3.max(data, function(d){	return d.n;	})]);
+		
+			yScale.domain([d3.min(data,function(d){	return d.val;}),d3.max(data, function(d){	return d.val;	})]);
+		
+			xAxis.scale(xScale);         
+	
+
+			yAxis.scale(yScale);
+	 
+			svg.selectAll(".xAxis")
+				.call(xAxis);
+
+			svg.selectAll(".yAxis")
+				.call(yAxis);
+
+			  svg.select("#wave")
+				  .datum(data)
+				  .attr("fill", "none")
+				  .attr("stroke", "steelblue")
+				  .attr("stroke-linejoin", "round")
+				  .attr("stroke-linecap", "round")
+				  .attr("stroke-width", 1.5)
+				  .attr("d", line);
+
+	  }, 100);
+
+
+		</script>
+	</body>
+</html>

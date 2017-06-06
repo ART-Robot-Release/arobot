@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<launch>
+
+   <param name="robot_description" textfile="$(find robot_gazebo)/urdf/robot.URDF" />
+
+  <include file="$(find robot_gazebo)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find robot_gazebo)/worlds/normal.world"/>
+    <arg name="paused" value="true"/>
+
+  </include>
+
+  <node name="spawn_urdf" pkg="gazebo_ros" respawn="false" output="screen" type="spawn_model"
+  		args="-file $(find robot_gazebo)/urdf/robot.URDF -urdf -model arobot -z 1.074" />
+
+
+  <!-- 1.0732 -->
+
+  <!-- <rosparam file="$(find robot_gazebo)/config/robot.yaml" command="load"/> -->
+
+  <rosparam file = "$(find arobot_hw)/config/robot_arms_controller.yaml" command="load" />
+
+
+  <!-- load the controllers -->
+  <include file = "$(find arobot_hw)/launch/load_arms_controller.launch" />
+
+  <node name="odometry_publisher" pkg="odometry_publisher" type="odometry_publisher" />
+
+</launch>

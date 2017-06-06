@@ -1,0 +1,44 @@
+# mNm/A
+torque_const:
+      NONE : 1.0
+      DX_26 : 42.9
+      DX_32 : 58.5
+      RE_40  : 60.3
+
+nominal_current:
+      NONE : 1.0
+      DX_26 : 1.41
+      DX_32 : 2.17
+      RE_40  : 3.17
+
+i2t_param:
+      multiple: 2.5
+      duration: 0.3 #s
+
+joint_motor_info:
+      neck_pitch : [NONE, "1"] # type, reduction ratio, multiple, duration
+      neck_yaw: [NONE, "1"]
+      l_shoulder_pitch: [DX_32, "200"]
+      l_elbow_yaw: [DX_26, "160"]
+      l_shoulder_roll: [DX_32, "100"]
+      l_elbow_pitch: [DX_26, "160"]
+      l_wrist_yaw: [DX_26, "100"]
+      r_shoulder_pitch: [DX_32, "200"]
+      r_elbow_yaw: [DX_26, "160"]
+      r_shoulder_roll: [DX_32, "100"]
+      r_elbow_pitch: [DX_26, "160"]
+      r_wrist_yaw: [DX_26, "100"]
+      waist_pitch: [DX_32, "200"]
+      waist_yaw: [DX_32, "200"]
+      l_hip_pitch: [DX_32, "360"]
+      l_hip_yaw: [DX_26, "250"]
+      l_hip_roll: [DX_32, "360"]
+      l_knee_pitch: [RE_40, "384"]
+      l_ankle_pitch: [DX_32, "360"]
+      l_ankle_roll: [DX_32, "360"]
+      r_hip_pitch: [DX_32, "360"]
+      r_hip_yaw: [DX_26, "250"]
+      r_hip_roll: [DX_32, "360"]
+      r_knee_pitch: [RE_40, "384"]
+      r_ankle_pitch: [DX_32, "360"]
+      r_ankle_roll: [DX_32, "360"]

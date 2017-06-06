@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<launch>
+
+  <!-- load the config param -->
+  <include file = "$(find arobot_hw)/launch/load_param.launch" />
+
+  <!-- load the controllers -->
+    <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+    output="screen" ns="/arobot" args="joint_state_controller waist_pitch_position_controller waist_yaw_position_controller l_hip_yaw_position_controller l_hip_roll_position_controller l_hip_pitch_position_controller l_knee_pitch_position_controller l_ankle_roll_position_controller l_ankle_pitch_position_controller r_hip_yaw_position_controller r_hip_roll_position_controller r_hip_pitch_position_controller r_knee_pitch_position_controller r_ankle_roll_position_controller r_ankle_pitch_position_controller l_shoulder_pitch_position_controller l_shoulder_roll_position_controller l_elbow_yaw_position_controller l_elbow_pitch_position_controller l_wrist_yaw_position_controller r_shoulder_pitch_position_controller r_shoulder_roll_position_controller r_elbow_yaw_position_controller r_elbow_pitch_position_controller r_wrist_yaw_position_controller neck_yaw_position_controller neck_pitch_position_controller" />
+
+
+  <!-- convert joint states to TF transforms for rviz, etc -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"
+	  respawn="false" output="screen">
+	  <remap from="/joint_states" to="/arobot/joint_states" />
+  </node>
+
+</launch>
+

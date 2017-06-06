@@ -1,0 +1,7 @@
+ethercat_slave_no:
+                  - 3
+                  - 4
+                  - 5
+                  - 2
+
+topic_publish_loop_hz: 10.0
